@@ -1,0 +1,55 @@
+version: 2.1
+jobs:
+  preview_deployment:
+    docker:
+      - image: cimg/node:20.5.0
+    environment:
+      VERCEL_ORG_ID: team_NHx9F6kwyhl5TrOiPi1emEaY
+      VERCEL_PROJECT_ID: prj_BpuJVqcORrh0pDh90jyOIqTXXfOb
+    steps:
+      - checkout
+      - run:
+          name: Install Vercel CLI
+          command: sudo npm install --global vercel@latest
+      - run:
+          name: Pull Vercel Environment Information
+          command: sudo vercel pull --yes --environment=preview --token=47KV18hlkVFN2dUqp4PoV0Vp
+      - run:
+          name: Build Project Artifacts
+          command: sudo vercel build --token=47KV18hlkVFN2dUqp4PoV0Vp
+      - run:
+          name: Deploy Project Artifacts to Vercel
+          command: sudo vercel deploy --prebuilt --token=47KV18hlkVFN2dUqp4PoV0Vp
+  production_deployment:
+    docker:
+      - image: cimg/node:20.5.0
+    environment:
+      VERCEL_ORG_ID: team_NHx9F6kwyhl5TrOiPi1emEaY
+      VERCEL_PROJECT_ID: prj_BpuJVqcORrh0pDh90jyOIqTXXfOb
+    steps:
+      - checkout
+      - run:
+          name: Install Vercel CLI
+          command: sudo npm install --global vercel@latest
+      - run:
+          name: Pull Vercel Environment Information
+          command: sudo vercel pull --yes --environment=production --token=47KV18hlkVFN2dUqp4PoV0Vp
+      - run:
+          name: Build Project Artifacts
+          command: sudo vercel build --prod --token=47KV18hlkVFN2dUqp4PoV0Vp
+      - run:
+          name: Deploy Project Artifacts to Vercel
+          command: sudo vercel deploy --prebuilt --prod --token=47KV18hlkVFN2dUqp4PoV0Vp
+
+workflows:
+  version: 2
+  preview_and_production:
+    jobs:
+      - preview_deployment:
+          filters:
+            branches:
+              ignore: /main/
+      - production_deployment:
+          filters:
+            branches:
+              only: /main/
