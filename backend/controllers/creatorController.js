@@ -1,6 +1,6 @@
 import mongoose from 'react'
 
-const assistantSchema = mongoose.Schema({
+const creatorSchema = mongoose.Schema({
     name :{
         type:String,
         required:true
@@ -16,6 +16,6 @@ const assistantSchema = mongoose.Schema({
     { timestamps: true }
 )
 
-const Assistant = mongoose.model('Assisstant', assistantSchema);
+const Creator  = mongoose.model('Creator', creatorSchema);
 
-export default Assistant;
+export default Creator;
