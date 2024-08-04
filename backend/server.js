@@ -1,7 +1,10 @@
 import express from 'express';
 import dotenv from 'dotenv'
-import dbconnect from './config/dbconnect.js';
+import connectDB from './config/dbConnect.js';
 
+//middleware
+import cors from 'cors'
+import morgan from 'morgan'
 
 //load contend of .env files
 dotenv.config()
@@ -11,6 +14,8 @@ dotenv.config()
 const app = express()
 const PORT = process.env.PORT || 8080
 
+//import routes
+import creatorRoutes from './routes/creatorRoutes.js'
 
 //Configure middleware
 app.use(
@@ -29,6 +34,8 @@ app.use((err, req, res, next) => {
     res.status(500).json({ error: 'Something went wrong' });
   });
 
+//mount routes
+app.use('/api/creators',creatorRoutes);
 
 
 const start = async () => {
@@ -45,9 +52,9 @@ const start = async () => {
             ''
           )} on database ${mongoConnectionName}... ✅ `
         );
-        app.listen(port, () => {
-          console.log(`Server is listening on port ${port}...`, '✅');
-          console.log(`Server is running  ${port}...`, '✅');
+        app.listen(PORT, () => {
+          console.log(`Server is listening on port ${PORT}...`, '✅');
+          console.log(`Server is running  ${PORT}...`, '✅');
         });
       } catch (error) {
         console.log(error);

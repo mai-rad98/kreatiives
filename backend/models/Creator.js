@@ -1,4 +1,4 @@
-import mongoose from 'react'
+import mongoose from 'mongoose'
 
 const creatorSchema = mongoose.Schema({
     name :{
