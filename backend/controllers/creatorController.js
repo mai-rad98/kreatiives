@@ -1,4 +1,4 @@
-import Creator from "../models/Creator.js";
+import Creator from "../models/Account.js";
 
 
 // add new creator

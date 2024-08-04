@@ -15,7 +15,7 @@ const app = express()
 const PORT = process.env.PORT || 8080
 
 //import routes
-import creatorRoutes from './routes/creatorRoutes.js'
+//import creatorRoutes from './routes/creatorRoutes.js'
 
 //Configure middleware
 app.use(
@@ -35,7 +35,7 @@ app.use((err, req, res, next) => {
   });
 
 //mount routes
-app.use('/api/creators',creatorRoutes);
+//app.use('/api/creators',creatorRoutes);
 
 
 const start = async () => {
