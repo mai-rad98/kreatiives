@@ -1,21 +1,36 @@
-import mongoose from 'react'
+import Creator from "../models/creator";
 
-const creatorSchema = mongoose.Schema({
-    name :{
-        type:String,
-        required:true
-       },
-    email : { 
-        type:String, 
-       required:true
-   },
-   password: { 
-    type: String, 
-    required: true },
-   },
-    { timestamps: true }
-)
 
-const Creator  = mongoose.model('Creator', creatorSchema);
+// add new creator
+export const newCreator = async(req,res) => {
+try{
+     //request body
+     const {name,email,password,role} = req.body
 
-export default Creator;
+     //check request body 
+     console.log("Request", req.body)
+ 
+     //create creator
+     const creator = await  Creator.create({
+         name,
+         email,
+         password,
+         role
+     })
+     console.log("Created creator", creator)
+     res.status(200).json(creator)
+
+}catch(err){
+    console.log("Error creating creator",err)
+}}
+
+//get all creators
+export const getAllCreators = async (req, res) => {
+try{
+    const creator = await Creator.find()
+    res.status(200).json(creator)
+}catch(err){
+    console.log("Error getting creators",err)
+}
+
+}
