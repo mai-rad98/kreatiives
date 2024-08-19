@@ -3,7 +3,7 @@ import bcrypt from 'bcrypt'
 
 
 const accountSchema = mongoose.Schema({
-    name :{
+    fullName :{
         type:String,
         required:true
        },
@@ -18,7 +18,7 @@ const accountSchema = mongoose.Schema({
        required: true 
     },
 
-    role: {
+    accountType: {
         type : String,
         required: true
        },
